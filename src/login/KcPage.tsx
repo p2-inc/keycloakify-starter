@@ -4,6 +4,11 @@ import type { KcContext } from "./KcContext";
 import { useI18n } from "./i18n";
 import DefaultPage from "keycloakify/login/DefaultPage";
 import Template from "keycloakify/login/Template";
+import OtpForm from "./pages/OtpForm";
+import EmailConfirmation from "./pages/EmailConfirmation";
+import EmailConfirmationError from "./pages/EmailConfirmationError";
+import ViewEmail from "./pages/ViewEmail";
+import ViewEmailContinuation from "./pages/ViewEmailContinuation";
 const UserProfileFormFields = lazy(
     () => import("keycloakify/login/UserProfileFormFields")
 );
@@ -19,6 +24,46 @@ export default function KcPage(props: { kcContext: KcContext }) {
         <Suspense>
             {(() => {
                 switch (kcContext.pageId) {
+                    case "otp-form.ftl":
+                        return (
+                            <OtpForm
+                                {...{ kcContext, i18n, classes }}
+                                Template={Template}
+                                doUseDefaultCss={true}
+                            />
+                        );
+                    case "email-confirmation.ftl":
+                        return (
+                            <EmailConfirmation
+                                {...{ kcContext, i18n, classes }}
+                                Template={Template}
+                                doUseDefaultCss={true}
+                            />
+                        );
+                    case "email-confirmation-error.ftl":
+                        return (
+                            <EmailConfirmationError
+                                {...{ kcContext, i18n, classes }}
+                                Template={Template}
+                                doUseDefaultCss={true}
+                            />
+                        );
+                    case "view-email.ftl":
+                        return (
+                            <ViewEmail
+                                {...{ kcContext, i18n, classes }}
+                                Template={Template}
+                                doUseDefaultCss={true}
+                            />
+                        );
+                    case "view-email-continuation.ftl":
+                        return (
+                            <ViewEmailContinuation
+                                {...{ kcContext, i18n, classes }}
+                                Template={Template}
+                                doUseDefaultCss={true}
+                            />
+                        );
                     default:
                         return (
                             <DefaultPage
