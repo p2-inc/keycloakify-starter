@@ -4,10 +4,15 @@ import type { KcContext } from "./KcContext";
 import { useI18n } from "./i18n";
 import DefaultPage from "keycloakify/login/DefaultPage";
 import Template from "./Template";
+import TemplateCentered from "./TemplateCentered";
+
 const UserProfileFormFields = lazy(
   () => import("keycloakify/login/UserProfileFormFields")
 );
 const Login = lazy(() => import("./pages/Login"));
+const LoginResetPassword = lazy(() => import("./pages/LoginResetPassword"));
+const LoginVerifyEmail = lazy(() => import("./pages/LoginVerifyEmail"));
+const LoginUpdatePassword = lazy(() => import("./pages/LoginUpdatePassword"));
 
 import "./main.css";
 
@@ -30,13 +35,37 @@ export default function KcPage(props: { kcContext: KcContext }) {
                 doUseDefaultCss={false}
               />
             );
+          case "login-reset-password.ftl":
+            return (
+              <LoginResetPassword
+                {...{ kcContext, i18n, classes }}
+                Template={TemplateCentered}
+                doUseDefaultCss={false}
+              />
+            );
+          case "login-verify-email.ftl":
+            return (
+              <LoginVerifyEmail
+                {...{ kcContext, i18n, classes }}
+                Template={TemplateCentered}
+                doUseDefaultCss={false}
+              />
+            );
+          case "login-update-password.ftl":
+            return (
+              <LoginUpdatePassword
+                {...{ kcContext, i18n, classes }}
+                Template={TemplateCentered}
+                doUseDefaultCss={false}
+              />
+            );
           default:
             return (
               <DefaultPage
                 kcContext={kcContext}
                 i18n={i18n}
                 classes={classes}
-                Template={Template}
+                Template={TemplateCentered}
                 doUseDefaultCss={true}
                 UserProfileFormFields={UserProfileFormFields}
                 doMakeUserConfirmPassword={doMakeUserConfirmPassword}

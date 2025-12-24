@@ -1,0 +1,54 @@
+import type { Meta, StoryObj } from "@storybook/react";
+import { createKcPageStory } from "../KcPageStory";
+
+const { KcPageStory } = createKcPageStory({ pageId: "login-verify-email.ftl" });
+
+const meta = {
+  title: "login/login-verify-email.ftl",
+  component: KcPageStory
+} satisfies Meta<typeof KcPageStory>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+/**
+ * Default - Verify Your Identity page
+ * Users enter a 6-digit verification code sent to their email or phone
+ */
+export const Default: Story = {
+  render: () => <KcPageStory />
+};
+
+/**
+ * With error message
+ */
+export const WithError: Story = {
+  render: () => (
+    <KcPageStory
+      kcContext={{
+        message: {
+          type: "error",
+          summary: "Invalid verification code. Please try again."
+        }
+      }}
+    />
+  )
+};
+
+/**
+ * With success message
+ */
+export const WithSuccess: Story = {
+  render: () => (
+    <KcPageStory
+      kcContext={{
+        message: {
+          type: "success",
+          summary: "Verification code sent successfully."
+        }
+      }}
+    />
+  )
+};
+
